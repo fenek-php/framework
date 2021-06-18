@@ -1,0 +1,8 @@
+{
+  "name": "kodipe/framework",
+  "description": "Micro framework",
+  "dependencies": [],
+  "autoload": {
+    "psr-4": {"Framework\\": "src/"}
+  }
+}
