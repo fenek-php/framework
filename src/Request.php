@@ -1,6 +1,6 @@
 <?php
 
-namespace Framework;
+namespace Fenek;
 
 class Request {
 
@@ -8,6 +8,14 @@ class Request {
 
   function getMethod() {
     return $_SERVER['REQUEST_METHOD'];
+  }
+
+  function getQueryParam($key) {
+    if(isset($_GET[$key])) {
+      return $_GET[$key];
+    } else {
+      return null; 
+    }
   }
 
   function getParam($key) {

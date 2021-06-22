@@ -1,10 +1,19 @@
 {
-  "name": "kodipe/framework",
+  "name": "fenek/framework",
   "description": "Micro framework",
+  "version": "0.1.0",
+  "licence": "MIT",
+  "keywords": ["php", "framework", "micro"],
   "dependencies": [],
+  "authors": [
+    {
+      "name": "Konrad Przydział",
+      "email": "konrad.przydzial@gmail.com"
+    }
+  ],
   "autoload": {
     "psr-4": {
-      "Framework\\": "src/"
+      "Fenek\\": "src/"
     }
   }
 }

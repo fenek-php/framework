@@ -1,6 +1,6 @@
 <?php
 
-namespace Framework;
+namespace Fenek;
 
 class Response {
   private $content = '';
