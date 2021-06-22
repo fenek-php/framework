@@ -2,7 +2,7 @@
 
 namespace Framework;
 
-use ReflectionFunction;
+use Framework\Request;
 
 class Application {
   
@@ -16,25 +16,34 @@ class Application {
   private $factories = [];
 
   function run() {
-    if(isset($this->routes[$_SERVER['REQUEST_METHOD']][$_SERVER['REQUEST_URI']])) {
+    foreach($this->routes[$_SERVER['REQUEST_METHOD']] as $path => $route) {
+      $pattern = str_replace("/", "\/", preg_replace("/\:([a-z]+)/im", "(?<$1>.+)", $path));
+      preg_match("/^" . $pattern . "$/im", $_SERVER['REQUEST_URI'], $matches);
 
-      $reflection = new ReflectionFunction($this->routes[$_SERVER['REQUEST_METHOD']][$_SERVER['REQUEST_URI']]);
+      $uriParams = array_filter($matches, "is_string", ARRAY_FILTER_USE_KEY);
 
-      $parameters = array_map(function($paramReflection) {
-        $type = $paramReflection->getType()->getName();
-        if(isset($this->factories[$type])) {
-          return $this->factories[$type]();
+      Request::setParams($uriParams);
+
+      if(isset($matches[0])) {
+        $reflection = new \ReflectionFunction($route);
+
+        $parameters = array_map(function($paramReflection) {
+          $type = $paramReflection->getType()->getName();
+          if(isset($this->factories[$type])) {
+            return $this->factories[$type]();
+          }
+          return new $type();
+        }, $reflection->getParameters());
+
+        $response = $reflection->invoke(...$parameters);
+
+        foreach($response->getHeaders() as $header) {
+          header($header);
         }
-        return new $type();
-      }, $reflection->getParameters());
 
-      $response = $reflection->invoke(...$parameters);
-
-      foreach($response->getHeaders() as $header) {
-        header($header);
+        echo $response->getContent();
+        return;
       }
-
-      echo $response->getContent();
     }
   }
 

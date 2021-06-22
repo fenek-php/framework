@@ -3,6 +3,8 @@
   "description": "Micro framework",
   "dependencies": [],
   "autoload": {
-    "psr-4": {"Framework\\": "src/"}
+    "psr-4": {
+      "Framework\\": "src/"
+    }
   }
 }

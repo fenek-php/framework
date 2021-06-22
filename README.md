@@ -1,4 +1,4 @@
-# PHP Micro Framewor
+# PHP Micro Framework
 
 ```php
 $app = new Application();
@@ -18,3 +18,19 @@ $app->get('/', function(Request $request, Response $response, MyCustomService $s
 
 $app->run();
 ```
+
+### Application
+
+* `get()`
+* `post()`
+* `put()`
+* `delete()`
+* `factory()`
+### Request
+
+* `getMethod()`
+* `getParam()`
+
+### Response
+
+* `json()`
