@@ -42,6 +42,10 @@ class Application {
   
           $response = $reflection->invoke(...$parameters);
   
+          if($response === null) {
+            throw new \Error("Controller must return Response instance");
+          }
+
           foreach($response->getHeaders() as $header) {
             header($header);
           }

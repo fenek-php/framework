@@ -39,6 +39,12 @@ class Response {
 
     return $this;
   }
+
+  function body($content) {
+    $this->content = $content;
+
+    return $this;
+  }
 }
 
 ?>
