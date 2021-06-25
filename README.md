@@ -26,11 +26,17 @@ $app->run();
 * `put()`
 * `delete()`
 * `factory()`
+* `catch()`
 ### Request
 
 * `getMethod()`
 * `getParam()`
+* `getPath()`
+* `getQueryParam()`
 
 ### Response
 
 * `json()`
+* `body()`
+* `code()`
+* `header()`
