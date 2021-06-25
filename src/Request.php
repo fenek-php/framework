@@ -26,6 +26,10 @@ class Request {
     }
   }
 
+  function getPath() {
+    return $_SERVER['REQUEST_URI'];
+  }
+
   static function setParams($params) {
     Request::$params = $params;
   }

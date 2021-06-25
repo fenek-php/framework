@@ -7,7 +7,9 @@ class Response {
 
   private $code = 200;
 
-  private $headers = [];
+  private $headers = [
+    'Content-Type: text/html'
+  ];
 
   function getContent() {
     return $this->content;
